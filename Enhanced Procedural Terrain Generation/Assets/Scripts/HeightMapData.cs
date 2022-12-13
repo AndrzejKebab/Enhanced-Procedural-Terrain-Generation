@@ -11,7 +11,7 @@ public class HeightMapData : MonoBehaviour
 	public int octaves;
 	[Range(0f, 1f)]
 	public float persistance;
-	[Range(1f, 19f)]
+	[Range(1f, 18f)]
 	public float lacunarity;
 	public Vector2 offset; 
 	public int seed;
@@ -19,6 +19,7 @@ public class HeightMapData : MonoBehaviour
 	public void HeightMap()
 	{ 
 	}
+
 	private void OnValidate()
 	{
 		if (mapWidth < 1) mapWidth = 1;

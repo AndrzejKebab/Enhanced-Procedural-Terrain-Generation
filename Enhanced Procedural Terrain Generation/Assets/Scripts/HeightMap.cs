@@ -46,7 +46,7 @@ public static class HeightMap
 
 					if (useSecondNoise)
 					{
-						float perlinValue2 = Mathf.PerlinNoise(sampleX2, sampleY2) / 0.1f;
+						float perlinValue2 = Mathf.PerlinNoise(sampleX2, sampleY2) - 1;
 						noiseHeight += perlinValue2 * amplitude;
 					}
 
