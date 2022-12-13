@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Mathematics;
 
 public static class HeightMap
 {
-	public static float[,] GenerateNoiseMap(HeightMapData heightMapData)
+	public static float[,] GenerateNoiseMap(HeightMapData heightMapData, bool useSecondNoise)
 	{
 		System.Random prng = new System.Random(heightMapData.seed);
 		Vector2[] octaveOffsets = new Vector2[heightMapData.octaves];
@@ -37,8 +38,17 @@ public static class HeightMap
 					float sampleX = (x - halfWidth) / heightMapData.noiseScale * frequency + octaveOffsets[i].x;
 					float sampleY = (y - halfHeight) / heightMapData.noiseScale * frequency + octaveOffsets[i].y;
 
-					float perlingValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
-					noiseHeight += perlingValue * amplitude;
+					float sampleX2 = x / (heightMapData.noiseScale / 4 ) * frequency + octaveOffsets[i].x;
+					float sampleY2 = y / (heightMapData.noiseScale / 4 ) * frequency + octaveOffsets[i].y;
+
+					float perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
+					noiseHeight += perlinValue * amplitude;
+
+					if (useSecondNoise)
+					{
+						float perlinValue2 = Mathf.PerlinNoise(sampleX2, sampleY2) / 0.1f;
+						noiseHeight += perlinValue2 * amplitude;
+					}
 
 					amplitude *= heightMapData.persistance;
 					frequency *= heightMapData.lacunarity;

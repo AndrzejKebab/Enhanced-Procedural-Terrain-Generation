@@ -536,6 +536,7 @@ GameObject:
   - component: {fileID: 1936061704}
   - component: {fileID: 1936061703}
   - component: {fileID: 1936061702}
+  - component: {fileID: 1936061705}
   m_Layer: 0
   m_Name: Map Generator
   m_TagString: Untagged
@@ -568,15 +569,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d2c5d18af467443a9543b12a46560e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 100
-  mapHeight: 100
-  noiseScale: 25
-  octaves: 8
-  persistance: 0.5
-  lacunarity: 2
-  seed: 0
-  offset: {x: 10, y: 10}
-  autoUpdate: 1
+  heightMapData: {fileID: 1936061705}
+  useSecondNoiseMap: 0
 --- !u!4 &1936061704
 Transform:
   m_ObjectHideFlags: 0
@@ -592,3 +586,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1936061705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936061701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7f7a8ee5f83bdf458bce55c7ca325da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapWidth: 100
+  mapHeight: 100
+  noiseScale: 200
+  octaves: 8
+  persistance: 0.5
+  lacunarity: 3
+  offset: {x: 0, y: 0}
+  seed: 0

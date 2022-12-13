@@ -24,6 +24,7 @@ public class MapDisplay : MonoBehaviour
 		}
 
 		texture.SetPixels(colorMap);
+		texture.filterMode = FilterMode.Bilinear;
 		texture.Apply();
 
 		textureRender.sharedMaterial.mainTexture = texture;
