@@ -358,6 +358,13 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,9 +541,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1936061704}
-  - component: {fileID: 1936061703}
   - component: {fileID: 1936061702}
-  - component: {fileID: 1936061705}
+  - component: {fileID: 1936061703}
   m_Layer: 0
   m_Name: Map Generator
   m_TagString: Untagged
@@ -570,23 +576,113 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 1
-  heightMapData: {fileID: 1936061705}
-  useSecondNoiseMap: 1
+  heightMapData: {fileID: 11400000, guid: 9b10da05339f9d84a96758c06a1551ea, type: 2}
+  continentalnessData: {fileID: 11400000, guid: f42b338294c29cc458096ed47f341322,
+    type: 2}
+  continentalnessCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  peakAndValleysData: {fileID: 11400000, guid: 85c64948673ae32458a7d9177e08c96a, type: 2}
+  peakAndValleysCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0010288064
+      value: 0.99527436
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.99383545
+      value: 0.11320877
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  erosionData: {fileID: 11400000, guid: 6afbd03d62be90e4180aef9b11f9eef8, type: 2}
+  erosionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   regions:
   - name: Water
-    height: 0.32
+    height: 50
+    continentalness: 0
+    peaksAndValleys: 0
+    erosion: 0
     color: {r: 0.12904951, g: 0.6385515, b: 0.9433962, a: 0}
   - name: Sand
-    height: 0.375
+    height: 70
+    continentalness: 0
+    peaksAndValleys: 0
+    erosion: 0
     color: {r: 0.8679245, g: 0.78461945, b: 0.46262014, a: 0}
   - name: Grass
-    height: 0.6
+    height: 140
+    continentalness: 0
+    peaksAndValleys: 0
+    erosion: 0
     color: {r: 0.25863126, g: 0.49056602, b: 0.18743324, a: 0}
   - name: Rock
-    height: 0.8
+    height: 180
+    continentalness: 0
+    peaksAndValleys: 0
+    erosion: 0
     color: {r: 0.4716981, g: 0.34932014, b: 0.21137415, a: 0}
   - name: Snow
-    height: 1.2
+    height: 200
+    continentalness: 0
+    peaksAndValleys: 0
+    erosion: 0
     color: {r: 1, g: 1, b: 1, a: 0}
 --- !u!4 &1936061704
 Transform:
@@ -603,23 +699,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1936061705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1936061701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7f7a8ee5f83bdf458bce55c7ca325da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapWidth: 1000
-  mapHeight: 1000
-  noiseScale: 100
-  octaves: 8
-  persistance: 0.5
-  lacunarity: 3
-  offset: {x: 0, y: 0}
-  seed: 0

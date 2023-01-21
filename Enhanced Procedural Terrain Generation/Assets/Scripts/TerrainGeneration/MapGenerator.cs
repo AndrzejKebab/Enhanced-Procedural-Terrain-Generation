@@ -14,12 +14,21 @@ public class MapGenerator : MonoBehaviour
 
 	[Header("Noise Data")]
 	public HeightMapData heightMapData;
-	public bool useSecondNoiseMap;
+	public HeightMapData continentalnessData;
+	public AnimationCurve continentalnessCurve;
+	public HeightMapData peakAndValleysData;
+	public AnimationCurve peakAndValleysCurve;
+	public HeightMapData erosionData;
+	public AnimationCurve erosionCurve;
+
 	public TerrainType[] regions;
 
 	public void GenerateMap()
 	{
-		float[,] noiseMap = HeightMap.GenerateNoiseMap(heightMapData, useSecondNoiseMap);
+		float[,] noiseMap = HeightMap.GenerateNoiseMap(heightMapData);
+		float[,] continentalnessMap = HeightMap.GenerateContinentalnessMap(continentalnessData);
+		float[,] erosionMap = HeightMap.GenerateErosionMap(erosionData);
+		float[,] peakAndValleysMap = HeightMap.GeneratePeaksAndValleysMap(peakAndValleysData);
 
 		Color[] colorMap = new Color[heightMapData.mapWidth * heightMapData.mapHeight];
 
@@ -27,7 +36,19 @@ public class MapGenerator : MonoBehaviour
 		{
 			for(int x = 0; x < heightMapData.mapWidth; x++)
 			{
-				float currentHeight = noiseMap[x, y];
+				float currentHeight = noiseMap[x, y] * (100 * continentalnessCurve.Evaluate(continentalnessMap[x, y]));
+
+				if (continentalnessMap[x, y] >= 0.3f)
+				{
+					currentHeight -= 50 * erosionCurve.Evaluate(erosionMap[x, y]);
+				}
+
+				if (erosionMap[x, y] >= 0.4f)
+				{
+					currentHeight += 20 * peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
+				}
+
+				currentHeight = Mathf.Clamp(currentHeight, 0, 200);
 
 				for(int i = 0; i < regions.Length; i++)
 				{
@@ -59,5 +80,8 @@ public struct TerrainType
 {
 	public string name;
 	public float height;
+	public float continentalness;
+	public float peaksAndValleys;
+	public float erosion;
 	public Color color;
 }

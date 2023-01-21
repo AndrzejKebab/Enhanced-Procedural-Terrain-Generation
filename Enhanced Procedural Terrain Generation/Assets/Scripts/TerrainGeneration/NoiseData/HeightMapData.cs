@@ -1,7 +1,8 @@
 using UnityEngine;
 
 [System.Serializable]
-public class HeightMapData : MonoBehaviour
+[CreateAssetMenu(fileName = "NoiseData", menuName = "Noise", order = 1)]
+public class HeightMapData : ScriptableObject
 {
 	[Header("Perlin Noise Data")]
 	public int mapWidth;
