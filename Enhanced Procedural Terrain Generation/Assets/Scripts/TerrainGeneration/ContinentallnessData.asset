@@ -15,7 +15,7 @@ MonoBehaviour:
   mapWidth: 1000
   mapHeight: 1000
   noiseScale: 500
-  octaves: 4
+  octaves: 8
   persistance: 0.5
   lacunarity: 2
   offset: {x: 0, y: 0}

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapWidth: 1000
   mapHeight: 1000
-  noiseScale: 500
-  octaves: 4
+  noiseScale: 250
+  octaves: 8
   persistance: 0.5
   lacunarity: 2
-  offset: {x: 200, y: 200}
+  offset: {x: 0, y: 0}
   seed: 0

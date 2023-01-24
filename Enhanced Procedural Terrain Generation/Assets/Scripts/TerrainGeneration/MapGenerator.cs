@@ -36,19 +36,29 @@ public class MapGenerator : MonoBehaviour
 		{
 			for(int x = 0; x < heightMapData.mapWidth; x++)
 			{
-				float currentHeight = noiseMap[x, y] * (100 * continentalnessCurve.Evaluate(continentalnessMap[x, y]));
+				float currentHeight = (100 * continentalnessCurve.Evaluate(continentalnessMap[x, y]));
 
-				if (continentalnessMap[x, y] >= 0.3f)
-				{
+				//if (continentalnessMap[x, y] >= 0.3f)
+				//{
 					currentHeight -= 50 * erosionCurve.Evaluate(erosionMap[x, y]);
-				}
+				//}
 
-				if (erosionMap[x, y] >= 0.4f)
+				if (erosionMap[x, y] >= 0.5f)
 				{
-					currentHeight += 20 * peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
+					currentHeight = 100 * erosionCurve.Evaluate(erosionMap[x, y]) + 50;
 				}
 
-				currentHeight = Mathf.Clamp(currentHeight, 0, 200);
+				//if (erosionMap[x, y] >= 0.4f)
+				//{
+					currentHeight += 100 * peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
+				//}
+
+				if (peakAndValleysMap[x, y] <= 0.10f)
+				{
+					currentHeight = peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
+				}
+
+				//currentHeight = Mathf.Clamp(currentHeight, 0, 200);
 
 				for(int i = 0; i < regions.Length; i++)
 				{

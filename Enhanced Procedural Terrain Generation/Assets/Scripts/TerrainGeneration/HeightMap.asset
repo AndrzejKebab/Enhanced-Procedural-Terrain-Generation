@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapWidth: 1000
   mapHeight: 1000
-  noiseScale: 100
+  noiseScale: 2000
   octaves: 8
   persistance: 0.5
   lacunarity: 2
