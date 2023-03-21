@@ -5,8 +5,8 @@ using UnityEngine;
 public class HeightMapData : ScriptableObject
 {
 	[Header("Perlin Noise Data")]
-	public int mapWidth;
-	public int mapHeight;
+	//public int mapWidth;
+	//public int mapHeight;
 	public float noiseScale;
 	[Range(1f, 8f)]
 	public int octaves;
@@ -23,8 +23,8 @@ public class HeightMapData : ScriptableObject
 
 	private void OnValidate()
 	{
-		if (mapWidth < 1) mapWidth = 1;
-		if (mapHeight < 1) mapHeight = 1;
+		//if (mapWidth < 1) mapWidth = 1;
+		//if (mapHeight < 1) mapHeight = 1;
 		if (noiseScale < 2) noiseScale = 2;
 	}
 }

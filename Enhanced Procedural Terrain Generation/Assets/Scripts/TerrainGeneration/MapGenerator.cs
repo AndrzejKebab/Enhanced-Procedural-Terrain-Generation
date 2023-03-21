@@ -13,6 +13,8 @@ public class MapGenerator : MonoBehaviour
 	public DrawMode drawMode;
 
 	[Header("Noise Data")]
+	public int Height;
+	public int Width;
 	public HeightMapData heightMapData;
 	public HeightMapData continentalnessData;
 	public AnimationCurve continentalnessCurve;
@@ -25,16 +27,16 @@ public class MapGenerator : MonoBehaviour
 
 	public void GenerateMap()
 	{
-		float[,] noiseMap = HeightMap.GenerateNoiseMap(heightMapData);
-		float[,] continentalnessMap = HeightMap.GenerateContinentalnessMap(continentalnessData);
-		float[,] erosionMap = HeightMap.GenerateErosionMap(erosionData);
-		float[,] peakAndValleysMap = HeightMap.GeneratePeaksAndValleysMap(peakAndValleysData);
+		float[,] noiseMap = HeightMap.GenerateNoiseMap(heightMapData, Height, Width);
+		float[,] continentalnessMap = HeightMap.GenerateContinentalnessMap(continentalnessData, Height, Width);
+		float[,] erosionMap = HeightMap.GenerateErosionMap(erosionData, Height, Width);
+		float[,] peakAndValleysMap = HeightMap.GeneratePeaksAndValleysMap(peakAndValleysData, Height, Width);
 
-		Color[] colorMap = new Color[heightMapData.mapWidth * heightMapData.mapHeight];
+		Color[] colorMap = new Color[Width * Height];
 
-		for(int y = 0; y < heightMapData.mapHeight; y++)
+		for(int y = 0; y < Height; y++)
 		{
-			for(int x = 0; x < heightMapData.mapWidth; x++)
+			for(int x = 0; x < Width; x++)
 			{
 				float currentHeight = (100 * continentalnessCurve.Evaluate(continentalnessMap[x, y]));
 
@@ -64,7 +66,7 @@ public class MapGenerator : MonoBehaviour
 				{
 					if(currentHeight <= regions[i].height)
 					{
-						colorMap[y * heightMapData.mapWidth + x] = regions[i].color;
+						colorMap[y * Width + x] = regions[i].color;
 						break;
 					}
 				}
@@ -79,7 +81,7 @@ public class MapGenerator : MonoBehaviour
 		}
 		else if(drawMode == DrawMode.ColorMap)
 		{
-			display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, heightMapData.mapWidth, heightMapData.mapHeight));
+			display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, Width, Height));
 		}
 
 	}

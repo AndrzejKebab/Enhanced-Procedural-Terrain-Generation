@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class HeightMap
 {
-	public static float[,] GenerateNoiseMap(HeightMapData heightMapData)
+	public static float[,] GenerateNoiseMap(HeightMapData heightMapData, int mapHeight, int mapWidth)
 	{
 		System.Random prng = new System.Random(heightMapData.seed);
 		Vector2[] octaveOffsets = new Vector2[heightMapData.octaves];
@@ -16,17 +16,17 @@ public static class HeightMap
 			octaveOffsets[i] = new Vector2(offsetX, offsetY);
 		}
 
-		float[,] noiseMap = new float[heightMapData.mapWidth, heightMapData.mapHeight];
+		float[,] noiseMap = new float[mapWidth, mapHeight];
 
 		float maxNoiseHeigth = float.MinValue;
 		float minNoiseHeight = float.MaxValue;
 
-		float halfWidth = heightMapData.mapWidth / 2;
-		float halfHeight = heightMapData.mapHeight / 2;
+		float halfWidth = mapWidth / 2;
+		float halfHeight = mapHeight / 2;
 		
-		for(int y = 0; y < heightMapData.mapHeight; y++)
+		for(int y = 0; y < mapHeight; y++)
 		{
-			for(int x = 0; x < heightMapData.mapWidth; x++)
+			for(int x = 0; x < mapWidth; x++)
 			{
 				float amplitude = 1;
 				float frequency = 1;
@@ -58,9 +58,9 @@ public static class HeightMap
 			}
 		}
 
-		for (int y = 0; y < heightMapData.mapHeight; y++)
+		for (int y = 0; y < mapHeight; y++)
 		{
-			for (int x = 0; x < heightMapData.mapWidth; x++)
+			for (int x = 0; x < mapWidth; x++)
 			{
 				noiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeigth, noiseMap[x, y]);
 			}
@@ -69,7 +69,7 @@ public static class HeightMap
 		return noiseMap;
 	}
 
-	public static float[,] GenerateContinentalnessMap(HeightMapData continentalnessData)
+	public static float[,] GenerateContinentalnessMap(HeightMapData continentalnessData, int mapHeight, int mapWidth)
 	{
 		System.Random prng = new System.Random(continentalnessData.seed);
 		Vector2[] octaveOffsets = new Vector2[continentalnessData.octaves];
@@ -82,17 +82,17 @@ public static class HeightMap
 			octaveOffsets[i] = new Vector2(offsetX, offsetY);
 		}
 
-		float[,] noiseMap = new float[continentalnessData.mapWidth, continentalnessData.mapHeight];
+		float[,] noiseMap = new float[mapWidth, mapHeight];
 
 		float maxNoiseHeigth = float.MinValue;
 		float minNoiseHeight = float.MaxValue;
 
-		float halfWidth = continentalnessData.mapWidth / 2;
-		float halfHeight = continentalnessData.mapHeight / 2;
+		float halfWidth = mapWidth / 2;
+		float halfHeight = mapHeight / 2;
 
-		for (int y = 0; y < continentalnessData.mapHeight; y++)
+		for (int y = 0; y < mapHeight; y++)
 		{
-			for (int x = 0; x < continentalnessData.mapWidth; x++)
+			for (int x = 0; x < mapWidth; x++)
 			{
 				float amplitude = 1;
 				float frequency = 1;
@@ -127,7 +127,7 @@ public static class HeightMap
 		return noiseMap;
 	}
 
-	public static float[,] GenerateErosionMap(HeightMapData erosionData)
+	public static float[,] GenerateErosionMap(HeightMapData erosionData, int mapHeight, int mapWidth)
 	{
 		System.Random prng = new System.Random(erosionData.seed);
 		Vector2[] octaveOffsets = new Vector2[erosionData.octaves];
@@ -140,17 +140,17 @@ public static class HeightMap
 			octaveOffsets[i] = new Vector2(offsetX, offsetY);
 		}
 
-		float[,] noiseMap = new float[erosionData.mapWidth, erosionData.mapHeight];
+		float[,] noiseMap = new float[mapWidth, mapHeight];
 
 		float maxNoiseHeigth = float.MinValue;
 		float minNoiseHeight = float.MaxValue;
 
-		float halfWidth = erosionData.mapWidth / 2;
-		float halfHeight = erosionData.mapHeight / 2;
+		float halfWidth = mapWidth / 2;
+		float halfHeight = mapHeight / 2;
 
-		for (int y = 0; y < erosionData.mapHeight; y++)
+		for (int y = 0; y < mapHeight; y++)
 		{
-			for (int x = 0; x < erosionData.mapWidth; x++)
+			for (int x = 0; x < mapWidth; x++)
 			{
 				float amplitude = 1;
 				float frequency = 1;
@@ -182,9 +182,9 @@ public static class HeightMap
 			}
 		}
 
-		for (int y = 0; y < erosionData.mapHeight; y++)
+		for (int y = 0; y < mapHeight; y++)
 		{
-			for (int x = 0; x < erosionData.mapWidth; x++)
+			for (int x = 0; x < mapWidth; x++)
 			{
 				noiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeigth, noiseMap[x, y]);
 				noiseMap[x, y] = -0.15f + noiseMap[x, y];
@@ -194,7 +194,7 @@ public static class HeightMap
 		return noiseMap;
 	}
 
-	public static float[,] GeneratePeaksAndValleysMap(HeightMapData peaksAndValleys)
+	public static float[,] GeneratePeaksAndValleysMap(HeightMapData peaksAndValleys, int mapHeight, int mapWidth)
 	{
 		System.Random prng = new System.Random(peaksAndValleys.seed);
 		Vector2[] octaveOffsets = new Vector2[peaksAndValleys.octaves];
@@ -207,17 +207,17 @@ public static class HeightMap
 			octaveOffsets[i] = new Vector2(offsetX, offsetY);
 		}
 
-		float[,] noiseMap = new float[peaksAndValleys.mapWidth, peaksAndValleys.mapHeight];
+		float[,] noiseMap = new float[mapWidth, mapHeight];
 
 		float maxNoiseHeigth = float.MinValue;
 		float minNoiseHeight = float.MaxValue;
 
-		float halfWidth = peaksAndValleys.mapWidth / 2;
-		float halfHeight = peaksAndValleys.mapHeight / 2;
+		float halfWidth = mapWidth / 2;
+		float halfHeight = mapHeight / 2;
 
-		for (int y = 0; y < peaksAndValleys.mapHeight; y++)
+		for (int y = 0; y < mapHeight; y++)
 		{
-			for (int x = 0; x < peaksAndValleys.mapWidth; x++)
+			for (int x = 0; x < mapWidth; x++)
 			{
 				float amplitude = 1;
 				float frequency = 1;
@@ -249,9 +249,9 @@ public static class HeightMap
 			}
 		}
 
-		for (int y = 0; y < peaksAndValleys.mapHeight; y++)
+		for (int y = 0; y < mapHeight; y++)
 		{
-			for (int x = 0; x < peaksAndValleys.mapWidth; x++)
+			for (int x = 0; x < mapWidth; x++)
 			{
 				noiseMap[x, y] = Mathf.Abs(noiseMap[x, y]);
 			}
