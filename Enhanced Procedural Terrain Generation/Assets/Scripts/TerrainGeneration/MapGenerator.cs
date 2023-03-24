@@ -27,40 +27,36 @@ public class MapGenerator : MonoBehaviour
 
 	public void GenerateMap()
 	{
-		float[,] noiseMap = HeightMap.GenerateNoiseMap(heightMapData, Height, Width);
+		//float[,] noiseMap = HeightMap.GenerateNoiseMap(heightMapData, Height, Width);
+		float[,] noiseMap = new float[Width, Height];
 		float[,] continentalnessMap = HeightMap.GenerateContinentalnessMap(continentalnessData, Height, Width);
 		float[,] erosionMap = HeightMap.GenerateErosionMap(erosionData, Height, Width);
 		float[,] peakAndValleysMap = HeightMap.GeneratePeaksAndValleysMap(peakAndValleysData, Height, Width);
 
 		Color[] colorMap = new Color[Width * Height];
 
-		for(int y = 0; y < Height; y++)
+		float maxNoiseHeight = float.MinValue;
+		float minNoiseHeight = float.MaxValue;
+
+		for (int y = 0; y < Height; y++)
 		{
 			for(int x = 0; x < Width; x++)
 			{
 				float currentHeight = (100 * continentalnessCurve.Evaluate(continentalnessMap[x, y]));
 
-				//if (continentalnessMap[x, y] >= 0.3f)
-				//{
-					currentHeight -= 50 * erosionCurve.Evaluate(erosionMap[x, y]);
-				//}
+				currentHeight -= 50 * erosionCurve.Evaluate(erosionMap[x, y]);
 
 				if (erosionMap[x, y] >= 0.5f)
 				{
 					currentHeight = 100 * erosionCurve.Evaluate(erosionMap[x, y]) + 50;
 				}
 
-				//if (erosionMap[x, y] >= 0.4f)
-				//{
-					currentHeight += 100 * peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
-				//}
+				currentHeight += 100 * peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
 
 				if (peakAndValleysMap[x, y] <= 0.10f)
 				{
 					currentHeight = peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
 				}
-
-				//currentHeight = Mathf.Clamp(currentHeight, 0, 200);
 
 				for(int i = 0; i < regions.Length; i++)
 				{
@@ -69,6 +65,31 @@ public class MapGenerator : MonoBehaviour
 						colorMap[y * Width + x] = regions[i].color;
 						break;
 					}
+				}
+				
+				if(drawMode == DrawMode.NoiseMap)
+				{
+					if (currentHeight > maxNoiseHeight)
+					{
+						maxNoiseHeight = currentHeight;
+					}
+					else if (currentHeight < minNoiseHeight)
+					{
+						minNoiseHeight = currentHeight;
+					}
+
+					noiseMap[x, y] = currentHeight;
+				}
+			}
+		}
+
+		if(drawMode == DrawMode.NoiseMap)
+		{
+			for (int y = 0; y < Height; y++)
+			{
+				for (int x = 0; x < Width; x++)
+				{
+					noiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, noiseMap[x, y]);
 				}
 			}
 		}
@@ -83,7 +104,6 @@ public class MapGenerator : MonoBehaviour
 		{
 			display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, Width, Height));
 		}
-
 	}
 }
 

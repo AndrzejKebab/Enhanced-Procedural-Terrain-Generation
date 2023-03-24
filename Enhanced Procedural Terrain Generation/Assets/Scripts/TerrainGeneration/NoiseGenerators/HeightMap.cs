@@ -84,9 +84,6 @@ public static class HeightMap
 
 		float[,] noiseMap = new float[mapWidth, mapHeight];
 
-		float maxNoiseHeigth = float.MinValue;
-		float minNoiseHeight = float.MaxValue;
-
 		float halfWidth = mapWidth / 2;
 		float halfHeight = mapHeight / 2;
 
@@ -109,15 +106,6 @@ public static class HeightMap
 
 					amplitude *= continentalnessData.persistance;
 					frequency *= continentalnessData.lacunarity;
-				}
-
-				if (noiseHeight > maxNoiseHeigth)
-				{
-					maxNoiseHeigth = noiseHeight;
-				}
-				else if (noiseHeight < minNoiseHeight)
-				{
-					minNoiseHeight = noiseHeight;
 				}
 
 				noiseMap[x, y] = noiseHeight + 0.35f;
@@ -209,9 +197,6 @@ public static class HeightMap
 
 		float[,] noiseMap = new float[mapWidth, mapHeight];
 
-		float maxNoiseHeigth = float.MinValue;
-		float minNoiseHeight = float.MaxValue;
-
 		float halfWidth = mapWidth / 2;
 		float halfHeight = mapHeight / 2;
 
@@ -234,15 +219,6 @@ public static class HeightMap
 
 					amplitude *= peaksAndValleys.persistance;
 					frequency *= peaksAndValleys.lacunarity;
-				}
-
-				if (noiseHeight > maxNoiseHeigth)
-				{
-					maxNoiseHeigth = noiseHeight;
-				}
-				else if (noiseHeight < minNoiseHeight)
-				{
-					minNoiseHeight = noiseHeight;
 				}
 
 				noiseMap[x, y] = noiseHeight;
