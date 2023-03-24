@@ -29,9 +29,10 @@ public class MapGenerator : MonoBehaviour
 	{
 		//float[,] noiseMap = HeightMap.GenerateNoiseMap(heightMapData, Height, Width);
 		float[,] noiseMap = new float[Width, Height];
-		float[,] continentalnessMap = HeightMap.GenerateContinentalnessMap(continentalnessData, Height, Width);
-		float[,] erosionMap = HeightMap.GenerateErosionMap(erosionData, Height, Width);
-		float[,] peakAndValleysMap = HeightMap.GeneratePeaksAndValleysMap(peakAndValleysData, Height, Width);
+		//float[,] continentalnessMap = HeightMap.GenerateContinentalnessMap(continentalnessData, Height, Width);
+		float[,] continentalnessMap = Noisegenerator.GenerateNoiseMap(continentalnessData, Height, Width, 0);
+		float[,] erosionMap = Noisegenerator.GenerateNoiseMap(erosionData, Height, Width, 1);
+		float[,] peakAndValleysMap = Noisegenerator.GenerateNoiseMap(peakAndValleysData, Height, Width, 2);
 
 		Color[] colorMap = new Color[Width * Height];
 

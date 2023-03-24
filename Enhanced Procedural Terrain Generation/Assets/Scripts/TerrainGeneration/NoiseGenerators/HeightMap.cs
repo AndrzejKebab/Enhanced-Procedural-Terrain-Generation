@@ -1,5 +1,5 @@
-using Unity.Mathematics;
 using UnityEngine;
+using Unity.Mathematics;
 
 public static class HeightMap
 {
@@ -100,7 +100,7 @@ public static class HeightMap
 					float sampleX = (x - halfWidth) / continentalnessData.noiseScale * frequency + octaveOffsets[i].x;
 					float sampleY = (y - halfHeight) / continentalnessData.noiseScale * frequency + octaveOffsets[i].y;
 
-					float perlinValue = Mathf.PerlinNoise(sampleX, sampleY);
+					float perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
 
 					noiseHeight += perlinValue * amplitude;
 
@@ -108,7 +108,7 @@ public static class HeightMap
 					frequency *= continentalnessData.lacunarity;
 				}
 
-				noiseMap[x, y] = noiseHeight + 0.35f;
+				noiseMap[x, y] = noiseHeight;
 			}
 		}
 
@@ -130,7 +130,7 @@ public static class HeightMap
 
 		float[,] noiseMap = new float[mapWidth, mapHeight];
 
-		float maxNoiseHeigth = float.MinValue;
+		float maxNoiseHeight = float.MinValue;
 		float minNoiseHeight = float.MaxValue;
 
 		float halfWidth = mapWidth / 2;
@@ -157,9 +157,9 @@ public static class HeightMap
 					frequency *= erosionData.lacunarity;
 				}
 
-				if (noiseHeight > maxNoiseHeigth)
+				if (noiseHeight > maxNoiseHeight)
 				{
-					maxNoiseHeigth = noiseHeight;
+					maxNoiseHeight = noiseHeight;
 				}
 				else if (noiseHeight < minNoiseHeight)
 				{
@@ -174,7 +174,7 @@ public static class HeightMap
 		{
 			for (int x = 0; x < mapWidth; x++)
 			{
-				noiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeigth, noiseMap[x, y]);
+				noiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, noiseMap[x, y]);
 				noiseMap[x, y] = -0.15f + noiseMap[x, y];
 			}
 		}

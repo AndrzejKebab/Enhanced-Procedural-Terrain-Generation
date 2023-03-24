@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f7a8ee5f83bdf458bce55c7ca325da, type: 3}
   m_Name: ContinentallnessData
   m_EditorClassIdentifier: 
-  mapWidth: 1000
-  mapHeight: 1000
   noiseScale: 500
   octaves: 8
   persistance: 0.5
   lacunarity: 2
   offset: {x: 0, y: 0}
-  seed: 0
+  seed: 561516

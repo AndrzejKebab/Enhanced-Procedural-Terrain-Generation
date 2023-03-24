@@ -14,13 +14,4 @@ public class HeightMapData : ScriptableObject
 	public float lacunarity;
 	public Vector2 offset; 
 	public int seed;
-
-	public void HeightMap()
-	{ 
-	}
-
-	private void OnValidate()
-	{
-		if (noiseScale < 2) noiseScale = 2;
-	}
 }
