@@ -16,7 +16,6 @@ public class MapGenerator : MonoBehaviour
 	public int Height;
 	public int Width;
 	public int Seed;
-	public HeightMapData heightMapData;
 	public HeightMapData continentalnessData;
 	public AnimationCurve continentalnessCurve;
 	public HeightMapData peakAndValleysData;
@@ -28,9 +27,7 @@ public class MapGenerator : MonoBehaviour
 
 	public void GenerateMap()
 	{
-		//float[,] noiseMap = HeightMap.GenerateNoiseMap(heightMapData, Height, Width);
 		float[,] noiseMap = new float[Width, Height];
-		//float[,] continentalnessMap = HeightMap.GenerateContinentalnessMap(continentalnessData, Height, Width);
 		float[,] continentalnessMap = Noisegenerator.GenerateNoiseMap(continentalnessData, Height, Width, Seed, 0);
 		float[,] erosionMap = Noisegenerator.GenerateNoiseMap(erosionData, Height, Width, Seed, 1);
 		float[,] peakAndValleysMap = Noisegenerator.GenerateNoiseMap(peakAndValleysData, Height, Width, Seed, 2);

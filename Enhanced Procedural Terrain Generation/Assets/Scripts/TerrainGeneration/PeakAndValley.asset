@@ -17,4 +17,3 @@ MonoBehaviour:
   persistance: 0.5
   lacunarity: 2
   offset: {x: 0, y: 0}
-  seed: 0

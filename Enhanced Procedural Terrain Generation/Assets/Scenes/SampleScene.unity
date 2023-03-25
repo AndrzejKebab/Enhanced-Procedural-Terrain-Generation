@@ -578,15 +578,15 @@ MonoBehaviour:
   drawMode: 1
   Height: 2250
   Width: 4000
-  heightMapData: {fileID: 11400000, guid: 9b10da05339f9d84a96758c06a1551ea, type: 2}
+  Seed: 0
   continentalnessData: {fileID: 11400000, guid: f42b338294c29cc458096ed47f341322,
     type: 2}
   continentalnessCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -1.010623
-      value: 1.200064
+      time: -1
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -655,8 +655,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.1667862
-      value: 0.004486084
+      time: 0
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -664,14 +664,23 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.5780841
-      value: 0.39076695
-      inSlope: -0.24603957
-      outSlope: -0.24603957
+      time: 0.4859676
+      value: 0.3743967
+      inSlope: 1.2828925
+      outSlope: 1.2828925
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.1826288
+      inWeight: 0.10506425
       outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5789445
+      value: 0.39076695
+      inSlope: -1.7821163
+      outSlope: -1.7821163
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.46179563
+      outWeight: 0.16307035
     - serializedVersion: 3
       time: 0.6965243
       value: 0.73977464
@@ -682,13 +691,13 @@ MonoBehaviour:
       inWeight: 0.36830613
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.0030776
-      value: 0.91037565
-      inSlope: 0
-      outSlope: 0
+      time: 1
+      value: 1
+      inSlope: -0.11598495
+      outSlope: -0.11598495
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.13769114
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -725,13 +734,13 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.47060066
-      value: 0.23955895
-      inSlope: -0.1902879
-      outSlope: -0.1902879
+      time: 0.5071302
+      value: 0.16408898
+      inSlope: -0.8199063
+      outSlope: -0.8199063
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.34783158
+      inWeight: 0.18192802
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.678496
@@ -766,33 +775,18 @@ MonoBehaviour:
   regions:
   - name: Water
     height: 50
-    continentalness: 0
-    peaksAndValleys: 0
-    erosion: 0
     color: {r: 0.12904951, g: 0.6385515, b: 0.9433962, a: 0}
   - name: Sand
-    height: 70
-    continentalness: 0
-    peaksAndValleys: 0
-    erosion: 0
+    height: 75
     color: {r: 0.8679245, g: 0.78461945, b: 0.46262014, a: 0}
   - name: Grass
-    height: 140
-    continentalness: 0
-    peaksAndValleys: 0
-    erosion: 0
+    height: 150
     color: {r: 0.25863126, g: 0.49056602, b: 0.18743324, a: 0}
   - name: Rock
-    height: 180
-    continentalness: 0
-    peaksAndValleys: 0
-    erosion: 0
+    height: 185
     color: {r: 0.4716981, g: 0.34932014, b: 0.21137415, a: 0}
   - name: Snow
     height: 250
-    continentalness: 0
-    peaksAndValleys: 0
-    erosion: 0
     color: {r: 1, g: 1, b: 1, a: 0}
 --- !u!4 &1936061704
 Transform:
