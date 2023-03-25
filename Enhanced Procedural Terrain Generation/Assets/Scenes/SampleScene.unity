@@ -725,8 +725,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.43622068
-      value: 0.091471136
+      time: 0.47060066
+      value: 0.23955895
       inSlope: -0.1902879
       outSlope: -0.1902879
       tangentMode: 0
@@ -789,7 +789,7 @@ MonoBehaviour:
     erosion: 0
     color: {r: 0.4716981, g: 0.34932014, b: 0.21137415, a: 0}
   - name: Snow
-    height: 200
+    height: 250
     continentalness: 0
     peaksAndValleys: 0
     erosion: 0

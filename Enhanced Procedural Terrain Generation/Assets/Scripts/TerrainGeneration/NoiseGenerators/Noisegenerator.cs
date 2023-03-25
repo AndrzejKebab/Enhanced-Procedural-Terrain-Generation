@@ -4,9 +4,9 @@ using Unity.Mathematics;
 
 public static class Noisegenerator
 {
-	public static float[,] GenerateNoiseMap(HeightMapData noiseMapData, int mapHeight, int mapWidth, int typeIndex)
+	public static float[,] GenerateNoiseMap(HeightMapData noiseMapData, int mapHeight, int mapWidth, int seed, int typeIndex)
 	{
-		System.Random prng = new System.Random(noiseMapData.seed);
+		System.Random prng = new System.Random(seed);
 		NativeArray<float2> octaveOffsets = new NativeArray<float2>(noiseMapData.octaves, Allocator.TempJob);
 
 		for (int i = 0; i < noiseMapData.octaves; i++)

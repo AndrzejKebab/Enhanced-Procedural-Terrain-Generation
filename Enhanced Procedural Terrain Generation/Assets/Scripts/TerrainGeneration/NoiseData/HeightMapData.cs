@@ -12,6 +12,5 @@ public class HeightMapData : ScriptableObject
 	public float persistance;
 	[Range(1f, 18f)]
 	public float lacunarity;
-	public Vector2 offset; 
-	public int seed;
+	public Vector2 offset;
 }

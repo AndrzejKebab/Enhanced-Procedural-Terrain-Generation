@@ -15,6 +15,7 @@ public class MapGenerator : MonoBehaviour
 	[Header("Noise Data")]
 	public int Height;
 	public int Width;
+	public int Seed;
 	public HeightMapData heightMapData;
 	public HeightMapData continentalnessData;
 	public AnimationCurve continentalnessCurve;
@@ -30,9 +31,9 @@ public class MapGenerator : MonoBehaviour
 		//float[,] noiseMap = HeightMap.GenerateNoiseMap(heightMapData, Height, Width);
 		float[,] noiseMap = new float[Width, Height];
 		//float[,] continentalnessMap = HeightMap.GenerateContinentalnessMap(continentalnessData, Height, Width);
-		float[,] continentalnessMap = Noisegenerator.GenerateNoiseMap(continentalnessData, Height, Width, 0);
-		float[,] erosionMap = Noisegenerator.GenerateNoiseMap(erosionData, Height, Width, 1);
-		float[,] peakAndValleysMap = Noisegenerator.GenerateNoiseMap(peakAndValleysData, Height, Width, 2);
+		float[,] continentalnessMap = Noisegenerator.GenerateNoiseMap(continentalnessData, Height, Width, Seed, 0);
+		float[,] erosionMap = Noisegenerator.GenerateNoiseMap(erosionData, Height, Width, Seed, 1);
+		float[,] peakAndValleysMap = Noisegenerator.GenerateNoiseMap(peakAndValleysData, Height, Width, Seed, 2);
 
 		Color[] colorMap = new Color[Width * Height];
 
@@ -45,18 +46,18 @@ public class MapGenerator : MonoBehaviour
 			{
 				float currentHeight = (100 * continentalnessCurve.Evaluate(continentalnessMap[x, y]));
 
-				currentHeight -= 50 * erosionCurve.Evaluate(erosionMap[x, y]);
-
-				if (erosionMap[x, y] >= 0.5f)
-				{
-					currentHeight = 100 * erosionCurve.Evaluate(erosionMap[x, y]) + 50;
-				}
-
-				currentHeight += 100 * peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
+				currentHeight *= 1 - erosionCurve.Evaluate(erosionMap[x, y]);
+				
+				//if (erosionMap[x, y] >= 0.5f)
+				//{
+				//	currentHeight = 100 * erosionCurve.Evaluate(erosionMap[x, y] + 50);
+				//}
+				
+				currentHeight *= 1.2f + peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
 
 				if (peakAndValleysMap[x, y] <= 0.10f)
 				{
-					currentHeight = peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
+					currentHeight *= peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
 				}
 
 				for(int i = 0; i < regions.Length; i++)
@@ -113,8 +114,5 @@ public struct TerrainType
 {
 	public string name;
 	public float height;
-	public float continentalness;
-	public float peaksAndValleys;
-	public float erosion;
 	public Color color;
 }

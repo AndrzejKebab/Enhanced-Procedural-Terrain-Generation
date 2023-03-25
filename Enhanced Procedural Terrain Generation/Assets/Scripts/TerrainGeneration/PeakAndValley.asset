@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f7a8ee5f83bdf458bce55c7ca325da, type: 3}
   m_Name: PeakAndValley
   m_EditorClassIdentifier: 
-  noiseScale: 300
+  noiseScale: 800
   octaves: 8
   persistance: 0.5
   lacunarity: 2

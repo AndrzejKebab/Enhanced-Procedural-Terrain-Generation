@@ -24,6 +24,7 @@ public struct NoiseJob : IJob
 	[WriteOnly]
 	public NativeArray<float> NoiseMap;
 
+	[BurstCompile]
 	public void Execute()
 	{
 		float maxNoiseHeight = float.MinValue;
