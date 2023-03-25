@@ -1,11 +1,15 @@
 # Enhanced Procedural Terrain Generation
  
-TODO:
+## Goal:
+Make terrain generation like in minecraft based on Henrik Kniberg videos.<br>
+https://www.youtube.com/watch?v=CSa5O6knuwI<br>
+https://www.youtube.com/watch?v=TycBrFKEteU
 
-Multi Noise Based Generation
-
-## Old Version
+## Old Versions
+### v1
 ![image](https://media.discordapp.net/attachments/605856223983566848/1052975671690924104/image.png)
-
-## New Version
+### v2
 ![image](https://cdn.discordapp.com/attachments/439774315496603658/1087804007927529544/image.png)
+
+## Actual Version
+![image](https://cdn.discordapp.com/attachments/767650216329347132/1088879758143660112/image.png)
