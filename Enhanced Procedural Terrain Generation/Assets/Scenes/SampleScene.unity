@@ -291,7 +291,7 @@ Camera:
   far clip plane: 1000
   field of view: 179
   orthographic: 1
-  orthographic size: 11200
+  orthographic size: 11275
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -315,7 +315,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 37, y: 137, z: 3}
+  m_LocalPosition: {x: 0, y: 150, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -586,7 +586,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: -1
-      value: 1
+      value: 150
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -595,7 +595,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: -0.8612839
-      value: 0.50503606
+      value: 50
       inSlope: -0.030261252
       outSlope: -0.030261252
       tangentMode: 0
@@ -603,8 +603,8 @@ MonoBehaviour:
       inWeight: 0.83436173
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: -0.49125424
-      value: 0.5064385
+      time: -0.5131353
+      value: 50.681274
       inSlope: 0.19416767
       outSlope: 0.19416767
       tangentMode: 0
@@ -613,7 +613,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: -0.47174802
-      value: 0.78627074
+      value: 100
       inSlope: 0.35924685
       outSlope: 0.35924685
       tangentMode: 0
@@ -621,8 +621,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: -0.0022849739
-      value: 0.80911
+      time: -0.008439333
+      value: 100
       inSlope: 0.26208064
       outSlope: 0.26208064
       tangentMode: 0
@@ -630,17 +630,17 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.049100578
-      value: 0.95618296
-      inSlope: 0.09232518
-      outSlope: 0.09232518
+      time: 0.061490715
+      value: 126.80555
+      inSlope: 12.974332
+      outSlope: 12.974332
       tangentMode: 0
       weightedMode: 0
       inWeight: 1
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1.2660828
-      value: 1.0136719
+      value: 150
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -773,17 +773,20 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   regions:
+  - name: DeepWater
+    height: 25
+    color: {r: 0, g: 0.266294, b: 1, a: 0}
   - name: Water
-    height: 50
+    height: 45
     color: {r: 0.12904951, g: 0.6385515, b: 0.9433962, a: 0}
   - name: Sand
-    height: 75
+    height: 64
     color: {r: 0.8679245, g: 0.78461945, b: 0.46262014, a: 0}
   - name: Grass
     height: 150
     color: {r: 0.25863126, g: 0.49056602, b: 0.18743324, a: 0}
   - name: Rock
-    height: 185
+    height: 200
     color: {r: 0.4716981, g: 0.34932014, b: 0.21137415, a: 0}
   - name: Snow
     height: 250

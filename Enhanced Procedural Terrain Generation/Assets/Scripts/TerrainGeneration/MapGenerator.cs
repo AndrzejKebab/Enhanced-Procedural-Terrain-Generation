@@ -41,7 +41,7 @@ public class MapGenerator : MonoBehaviour
 		{
 			for(int x = 0; x < Width; x++)
 			{
-				float currentHeight = (100 * continentalnessCurve.Evaluate(continentalnessMap[x, y]));
+				float currentHeight =  continentalnessCurve.Evaluate(continentalnessMap[x, y]);
 
 				currentHeight *= 1 - erosionCurve.Evaluate(erosionMap[x, y]);
 				
@@ -50,7 +50,7 @@ public class MapGenerator : MonoBehaviour
 				//	currentHeight = 100 * erosionCurve.Evaluate(erosionMap[x, y] + 50);
 				//}
 				
-				currentHeight *= 1.2f + peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
+				currentHeight *= 0.6f + peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
 
 				if (peakAndValleysMap[x, y] <= 0.10f)
 				{
