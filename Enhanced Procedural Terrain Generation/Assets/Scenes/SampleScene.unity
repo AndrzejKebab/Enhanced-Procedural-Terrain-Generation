@@ -221,13 +221,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92259251}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4000, y: 1, z: 2250}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
@@ -314,13 +314,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 150, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -352,6 +352,7 @@ MonoBehaviour:
   m_Dithering: 0
   m_ClearDepth: 1
   m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
   m_UseScreenCoordOverride: 0
   m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
@@ -452,13 +453,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: -130.82, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
@@ -524,13 +525,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832575517}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -130.82, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1936061701
 GameObject:
@@ -639,8 +640,8 @@ MonoBehaviour:
       inWeight: 1
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.2660828
-      value: 150
+      time: 1.0048923
+      value: 150.27249
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -655,8 +656,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
+      time: 0.0016326904
+      value: 0.104003906
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -773,24 +774,36 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   regions:
+  - name: TooLow
+    height: 49
+    color: {r: 1, g: 0, b: 0.8118372, a: 0}
   - name: DeepWater
-    height: 25
+    height: 75
     color: {r: 0, g: 0.266294, b: 1, a: 0}
   - name: Water
-    height: 45
+    height: 100
     color: {r: 0.12904951, g: 0.6385515, b: 0.9433962, a: 0}
   - name: Sand
-    height: 64
+    height: 110
     color: {r: 0.8679245, g: 0.78461945, b: 0.46262014, a: 0}
   - name: Grass
-    height: 150
+    height: 135
     color: {r: 0.25863126, g: 0.49056602, b: 0.18743324, a: 0}
-  - name: Rock
-    height: 200
+  - name: HighLand
+    height: 185
+    color: {r: 0.09467536, g: 0.405, b: 0, a: 0}
+  - name: LowHills
+    height: 215
     color: {r: 0.4716981, g: 0.34932014, b: 0.21137415, a: 0}
+  - name: HighHills
+    height: 260
+    color: {r: 0.47058824, g: 0.37974334, b: 0.27717647, a: 0}
   - name: Snow
-    height: 250
+    height: 300
     color: {r: 1, g: 1, b: 1, a: 0}
+  - name: TooHigh
+    height: 600
+    color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &1936061704
 Transform:
   m_ObjectHideFlags: 0
@@ -798,11 +811,20 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936061701}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 330585546}
+  - {fileID: 410087041}
+  - {fileID: 832575519}
+  - {fileID: 92259255}
+  - {fileID: 1936061704}

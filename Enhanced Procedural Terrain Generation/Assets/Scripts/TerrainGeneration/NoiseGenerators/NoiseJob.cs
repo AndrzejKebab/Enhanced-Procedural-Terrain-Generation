@@ -3,7 +3,7 @@ using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
 
-[BurstCompile(CompileSynchronously = true)]
+[BurstCompile(OptimizeFor = OptimizeFor.Performance, FloatMode = FloatMode.Fast, FloatPrecision = FloatPrecision.Low)]
 public struct NoiseJob : IJob
 {
 	public struct NoiseData
@@ -13,7 +13,7 @@ public struct NoiseJob : IJob
 		public int MapHeight;
 		public float Scale;
 		public int Octaves;
-		public float Persistance;
+		public float Persistence;
 		public float Lacunarity;
 		public int NoiseTypeIndex;
 	}
@@ -33,7 +33,7 @@ public struct NoiseJob : IJob
 		float halfWidth = NoiseMapData.MapWidth / 2;
 		float halfHeight = NoiseMapData.MapHeight / 2;
 
-		NativeArray<float> _noiseMap = new NativeArray<float>(NoiseMapData.MapWidth * NoiseMapData.MapHeight ,Allocator.Temp); ;
+		NativeArray<float> _noiseMap = new(NoiseMapData.MapWidth * NoiseMapData.MapHeight ,Allocator.Temp); ;
 
 		for (int y = 0; y < NoiseMapData.MapHeight; y++)
 		{
@@ -53,7 +53,7 @@ public struct NoiseJob : IJob
 
 					noiseHeight += perlinValue * amplitude;
 
-					amplitude *= NoiseMapData.Persistance;
+					amplitude *= NoiseMapData.Persistence;
 					frequency *= NoiseMapData.Lacunarity;
 				}
 

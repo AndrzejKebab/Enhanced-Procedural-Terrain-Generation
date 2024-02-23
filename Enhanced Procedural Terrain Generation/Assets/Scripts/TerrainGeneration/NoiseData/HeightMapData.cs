@@ -10,7 +10,7 @@ public class HeightMapData : ScriptableObject
 	public int octaves;
 	[Range(0f, 1f)]
 	public float persistance;
-	[Range(1f, 18f)]
+	[Range(1f, 4f)]
 	public float lacunarity;
 	public Vector2 offset;
 }

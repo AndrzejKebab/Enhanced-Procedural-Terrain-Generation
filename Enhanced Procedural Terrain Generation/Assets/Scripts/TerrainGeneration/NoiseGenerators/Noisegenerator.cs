@@ -33,7 +33,7 @@ public static class Noisegenerator
 				MapHeight = mapHeight,
 				Scale = noiseMapData.noiseScale,
 				Octaves = noiseMapData.octaves,
-				Persistance = noiseMapData.persistance,
+				Persistence = noiseMapData.persistance,
 				Lacunarity = noiseMapData.lacunarity,
 				NoiseTypeIndex = typeIndex,
 			},

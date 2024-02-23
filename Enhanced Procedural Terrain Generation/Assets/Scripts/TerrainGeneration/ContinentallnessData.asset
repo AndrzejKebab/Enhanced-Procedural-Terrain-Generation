@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ContinentallnessData
   m_EditorClassIdentifier: 
   noiseScale: 1000
-  octaves: 3
+  octaves: 4
   persistance: 0.5
   lacunarity: 2
   offset: {x: 0, y: 0}
