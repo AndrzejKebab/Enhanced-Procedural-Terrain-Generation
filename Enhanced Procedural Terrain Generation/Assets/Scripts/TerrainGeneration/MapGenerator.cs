@@ -44,7 +44,7 @@ public class MapGenerator : MonoBehaviour
 				var erosion = erosionCurve.Evaluate(erosionMap[x, y]);
 				var peakAndValleys = peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
 				var currentHeight = math.floor(continentalness * (erosion + peakAndValleys) + 49);
-				currentHeight = Mathf.InverseLerp(0, 300, currentHeight) * 300;
+
 				for (int i = 0; i < regions.Length; i++)
 				{
 					if (currentHeight <= regions[i].height)

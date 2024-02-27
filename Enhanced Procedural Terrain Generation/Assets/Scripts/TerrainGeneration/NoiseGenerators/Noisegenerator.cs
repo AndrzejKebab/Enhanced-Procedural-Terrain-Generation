@@ -7,12 +7,12 @@ public static class Noisegenerator
 	public static float[,] GenerateNoiseMap(HeightMapData noiseMapData, int mapHeight, int mapWidth, int seed, int typeIndex)
 	{
 		System.Random prng = new System.Random(seed);
-		NativeArray<float2> octaveOffsets = new NativeArray<float2>(noiseMapData.octaves, Allocator.TempJob);
+		NativeArray<float2> octaveOffsets = new NativeArray<float2>(noiseMapData.Octaves, Allocator.TempJob);
 
-		for (int i = 0; i < noiseMapData.octaves; i++)
+		for (int i = 0; i < noiseMapData.Octaves; i++)
 		{
-			float offsetX = prng.Next(-100000, 100000) + noiseMapData.offset.x;
-			float offsetY = prng.Next(-100000, 100000) + noiseMapData.offset.y;
+			float offsetX = prng.Next(-100000, 100000) + noiseMapData.Offset.x;
+			float offsetY = prng.Next(-100000, 100000) + noiseMapData.Offset.y;
 
 			octaveOffsets[i] = new float2(offsetX, offsetY);
 		}
@@ -24,6 +24,12 @@ public static class Noisegenerator
 			NoiseMap = new NativeArray<float>(mapWidth * mapHeight, Allocator.TempJob),
 		};
 
+		FastNoise fastNoise = new("FractalFBm");
+		fastNoise.Set("Source", new FastNoise("OpenSimplex2"));
+		fastNoise.Set("Octaves", noiseMapData.Octaves);
+		fastNoise.Set("Lacunarity", noiseMapData.Lacunarity);
+		fastNoise.Set("Gain", noiseMapData.Persistence);
+
 		JobHandle generateNoise = new NoiseJob
 		{
 			NoiseMapData = new NoiseJob.NoiseData
@@ -31,13 +37,15 @@ public static class Noisegenerator
 				OctaveOffsets = octaveOffsets,
 				MapWidth = mapWidth,
 				MapHeight = mapHeight,
-				Scale = noiseMapData.noiseScale,
-				Octaves = noiseMapData.octaves,
-				Persistence = noiseMapData.persistance,
-				Lacunarity = noiseMapData.lacunarity,
+				Scale = noiseMapData.NoiseScale,
+				Octaves = noiseMapData.Octaves,
+				Persistence = noiseMapData.Persistence,
+				Lacunarity = noiseMapData.Lacunarity,
 				NoiseTypeIndex = typeIndex,
+				Seed = seed
 			},
-			NoiseMap = noiseData.NoiseMap
+			NoiseMap = noiseData.NoiseMap,
+			nodePtr = fastNoise.NodeHandlePtr,
 		}.Schedule();
 
 		generateNoise.Complete();

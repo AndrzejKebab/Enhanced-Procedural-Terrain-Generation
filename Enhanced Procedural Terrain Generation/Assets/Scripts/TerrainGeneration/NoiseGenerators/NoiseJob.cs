@@ -1,7 +1,10 @@
+using System;
 using Unity.Burst;
 using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.Jobs;
 using Unity.Mathematics;
+using static FastNoise;
 
 [BurstCompile(OptimizeFor = OptimizeFor.Performance, FloatMode = FloatMode.Fast, FloatPrecision = FloatPrecision.Low)]
 public struct NoiseJob : IJob
@@ -16,7 +19,10 @@ public struct NoiseJob : IJob
 		public float Persistence;
 		public float Lacunarity;
 		public int NoiseTypeIndex;
+		public int Seed;
 	}
+
+	[NativeDisableUnsafePtrRestriction] public IntPtr nodePtr;
 
 	[ReadOnly]
 	public NoiseData NoiseMapData;
@@ -27,35 +33,32 @@ public struct NoiseJob : IJob
 	[BurstCompile]
 	public void Execute()
 	{
+		/*
+		FastNoiseLite fastNoiseLite = new();
+		fastNoiseLite.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2S);
+		fastNoiseLite.SetFractalType(FastNoiseLite.FractalType.FBm);
+		fastNoiseLite.SetFractalOctaves(NoiseMapData.Octaves);
+		fastNoiseLite.SetFractalLacunarity(NoiseMapData.Lacunarity);
+		fastNoiseLite.SetFractalGain(NoiseMapData.Persistence);
+		fastNoiseLite.SetFrequency(0.01f);
+		fastNoiseLite.SetSeed(NoiseMapData.Seed);
+
 		float maxNoiseHeight = float.MinValue;
 		float minNoiseHeight = float.MaxValue;
 
 		float halfWidth = NoiseMapData.MapWidth / 2;
 		float halfHeight = NoiseMapData.MapHeight / 2;
-
+		*/
 		NativeArray<float> _noiseMap = new(NoiseMapData.MapWidth * NoiseMapData.MapHeight ,Allocator.Temp); ;
-
+		/*
 		for (int y = 0; y < NoiseMapData.MapHeight; y++)
 		{
 			for (int x = 0; x < NoiseMapData.MapWidth; x++)
 			{
-				float amplitude = 1;
-				float frequency = 1;
-				float noiseHeight = 0;
+				float sampleX = (x - halfWidth) / NoiseMapData.Scale;
+				float sampleY = (y - halfHeight) / NoiseMapData.Scale;
 
-				for (int i = 0; i < NoiseMapData.Octaves; i++)
-				{
-					float sampleX = (x - halfWidth) / NoiseMapData.Scale * frequency + NoiseMapData.OctaveOffsets[i].x;
-					float sampleY = (y - halfHeight) / NoiseMapData.Scale * frequency + NoiseMapData.OctaveOffsets[i].y;
-					float2 sampleXY = new float2(sampleX, sampleY);
-
-					float perlinValue = noise.snoise(sampleXY);
-
-					noiseHeight += perlinValue * amplitude;
-
-					amplitude *= NoiseMapData.Persistence;
-					frequency *= NoiseMapData.Lacunarity;
-				}
+				//var noiseHeight = fastNoiseLite.GetNoise(sampleX, sampleY);
 
 				_noiseMap[x + y * NoiseMapData.MapWidth] = noiseHeight;
 
@@ -80,6 +83,23 @@ public struct NoiseJob : IJob
 						break;
 				}
 			}
+		}
+		*/
+
+		GenUniformGrid2D(nodePtr, _noiseMap, 0, 0, NoiseMapData.MapWidth, NoiseMapData.MapHeight, 0.001f, NoiseMapData.Seed);
+		for (int y = 0; y < NoiseMapData.MapHeight; y++)		
+		for (int x = 0; x < NoiseMapData.MapWidth; x++)
+			
+		switch (NoiseMapData.NoiseTypeIndex)
+		{
+			case 0:
+				return;
+			case 1:
+				NoiseMap[x + y * NoiseMapData.MapWidth] = math.unlerp(-1, 1, _noiseMap[x + y * NoiseMapData.MapWidth]);
+				break;
+			case 2:
+				NoiseMap[x + y * NoiseMapData.MapWidth] = math.abs(_noiseMap[x + y * NoiseMapData.MapWidth]);
+				break;
 		}
 	}
 }

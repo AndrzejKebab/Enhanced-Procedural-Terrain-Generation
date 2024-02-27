@@ -5,12 +5,12 @@ using UnityEngine;
 public class HeightMapData : ScriptableObject
 {
 	[Header("Perlin Noise Data")]
-	public float noiseScale;
+	public float NoiseScale;
 	[Range(1f, 8f)]
-	public int octaves;
+	public int Octaves;
 	[Range(0f, 1f)]
-	public float persistance;
+	public float Persistence;
 	[Range(1f, 4f)]
-	public float lacunarity;
-	public Vector2 offset;
+	public float Lacunarity;
+	public Vector2 Offset;
 }
