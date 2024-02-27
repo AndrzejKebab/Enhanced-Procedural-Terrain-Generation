@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f7a8ee5f83bdf458bce55c7ca325da, type: 3}
   m_Name: ErosionData
   m_EditorClassIdentifier: 
-  noiseScale: 2000
+  noiseScale: 2500
   octaves: 4
   persistance: 0.5
   lacunarity: 2

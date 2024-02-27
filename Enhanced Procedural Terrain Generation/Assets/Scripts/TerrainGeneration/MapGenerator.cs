@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public enum DrawMode
@@ -39,56 +38,51 @@ public class MapGenerator : MonoBehaviour
 
 		for (int y = 0; y < Height; y++)
 		{
-			for(int x = 0; x < Width; x++)
+			for (int x = 0; x < Width; x++)
 			{
 				var continentalness = continentalnessCurve.Evaluate(continentalnessMap[x, y]);
 				var erosion = erosionCurve.Evaluate(erosionMap[x, y]);
 				var peakAndValleys = peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
-				var currentHeight = continentalness * (erosion + peakAndValleys) + 49;
-
-				for(int i = 0; i < regions.Length; i++)
+				var currentHeight = math.floor(continentalness * (erosion + peakAndValleys) + 49);
+				currentHeight = Mathf.InverseLerp(0, 300, currentHeight) * 300;
+				for (int i = 0; i < regions.Length; i++)
 				{
-					if(currentHeight <= regions[i].height)
+					if (currentHeight <= regions[i].height)
 					{
 						colorMap[y * Width + x] = regions[i].color;
 						break;
 					}
 				}
-				
-				if(drawMode == DrawMode.NoiseMap)
-				{
-					if (currentHeight > maxNoiseHeight)
-					{
-						maxNoiseHeight = currentHeight;
-					}
-					else if (currentHeight < minNoiseHeight)
-					{
-						minNoiseHeight = currentHeight;
-					}
 
-					noiseMap[x, y] = currentHeight;
+
+				if (currentHeight > maxNoiseHeight)
+				{
+					maxNoiseHeight = currentHeight;
 				}
+				else if (currentHeight < minNoiseHeight)
+				{
+					minNoiseHeight = currentHeight;
+				}
+
+				noiseMap[x, y] = currentHeight;
 			}
 		}
 
-		if(drawMode == DrawMode.NoiseMap)
+		for (int y = 0; y < Height; y++)
 		{
-			for (int y = 0; y < Height; y++)
+			for (int x = 0; x < Width; x++)
 			{
-				for (int x = 0; x < Width; x++)
-				{
-					noiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, noiseMap[x, y]);
-				}
+				noiseMap[x, y] = Mathf.Lerp(minNoiseHeight, maxNoiseHeight, noiseMap[x, y]);
 			}
 		}
 
 		MapDisplay display = FindObjectOfType<MapDisplay>();
-		
-		if(drawMode == DrawMode.NoiseMap)
+
+		if (drawMode == DrawMode.NoiseMap)
 		{
 			display.DrawTexture(TextureGenerator.TextureFromHeightMap(noiseMap));
 		}
-		else if(drawMode == DrawMode.ColorMap)
+		else if (drawMode == DrawMode.ColorMap)
 		{
 			display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, Width, Height));
 		}
