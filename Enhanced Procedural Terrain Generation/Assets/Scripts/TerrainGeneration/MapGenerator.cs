@@ -46,9 +46,6 @@ public class MapGenerator : MonoBehaviour
 				var peakAndValleys = peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
 				var currentHeight = math.floor(continentalness * (erosion + peakAndValleys) + 49);
 
-
-				//var currentHeight = continentalnessCurve.Evaluate(continentalnessMap[x, y]);
-
 				if(drawMode == DrawMode.ColorMap)
 				{				
 					for (int i = 0; i < regions.Length; i++)

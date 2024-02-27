@@ -39,9 +39,9 @@ public struct NoiseJob : IJob
 		{
 			switch (NoiseType)
 			{
-				case NoiseType.Continentalness:
-					NoiseMap = _noiseMap;
-					break;
+				default:
+						NoiseMap.CopyFrom(_noiseMap);
+					return;
 				case NoiseType.Erosion:
 					NoiseMap[x + y * Width] = math.unlerp(minmax.min, minmax.max, _noiseMap[x + y * Width]);
 					break;

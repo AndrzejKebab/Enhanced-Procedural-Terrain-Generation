@@ -25,4 +25,4 @@ https://www.alanzucconi.com/2022/06/05/minecraft-world-generation/
 
 ## Current Version 
 ### Fast Noise 2
-![image](https://github.com/AndrzejKebab/Enhanced-Procedural-Terrain-Generation/assets/73285275/9454df32-8f51-49f1-8daf-e99bb3f282ed)
+![image](https://github.com/AndrzejKebab/Enhanced-Procedural-Terrain-Generation/assets/73285275/88fb651c-41be-408b-9546-1b831b3ef9c0)
