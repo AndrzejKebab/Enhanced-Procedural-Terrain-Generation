@@ -1,22 +1,10 @@
 using Unity.Collections;
 using Unity.Jobs;
-using Unity.Mathematics;
 
-public static class Noisegenerator
+public static class NoiseGenerator
 {
-	public static float[,] GenerateNoiseMap(HeightMapData noiseMapData, int mapHeight, int mapWidth, int seed, int typeIndex)
+	public static float[,] GenerateNoiseMap(HeightMapData noiseMapData, int mapHeight, int mapWidth, int seed)
 	{
-		System.Random prng = new System.Random(seed);
-		NativeArray<float2> octaveOffsets = new NativeArray<float2>(noiseMapData.Octaves, Allocator.TempJob);
-
-		for (int i = 0; i < noiseMapData.Octaves; i++)
-		{
-			float offsetX = prng.Next(-100000, 100000) + noiseMapData.Offset.x;
-			float offsetY = prng.Next(-100000, 100000) + noiseMapData.Offset.y;
-
-			octaveOffsets[i] = new float2(offsetX, offsetY);
-		}
-
 		float[,] noiseMap = new float[mapWidth, mapHeight];
 
 		var noiseData = new NoiseJob()
@@ -32,18 +20,13 @@ public static class Noisegenerator
 
 		JobHandle generateNoise = new NoiseJob
 		{
-			NoiseMapData = new NoiseJob.NoiseData
-			{
-				OctaveOffsets = octaveOffsets,
-				MapWidth = mapWidth,
-				MapHeight = mapHeight,
-				Scale = noiseMapData.NoiseScale,
-				Octaves = noiseMapData.Octaves,
-				Persistence = noiseMapData.Persistence,
-				Lacunarity = noiseMapData.Lacunarity,
-				NoiseTypeIndex = typeIndex,
-				Seed = seed
-			},
+
+			Width = mapWidth,
+			Height = mapHeight,
+			Scale = noiseMapData.NoiseScale,
+			Lacunarity = noiseMapData.Lacunarity,
+			NoiseType = noiseMapData.NoiseType,
+			Seed = seed,
 			NoiseMap = noiseData.NoiseMap,
 			nodePtr = fastNoise.NodeHandlePtr,
 		}.Schedule();
