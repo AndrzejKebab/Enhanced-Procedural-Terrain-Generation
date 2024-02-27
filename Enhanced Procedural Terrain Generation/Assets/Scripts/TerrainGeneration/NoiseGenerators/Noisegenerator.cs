@@ -13,7 +13,7 @@ public static class NoiseGenerator
 		};
 
 		FastNoise fastNoise = new("FractalFBm");
-		fastNoise.Set("Source", new FastNoise("OpenSimplex2"));
+		fastNoise.Set("Source", new FastNoise("Simplex"));
 		fastNoise.Set("Octaves", noiseMapData.Octaves);
 		fastNoise.Set("Lacunarity", noiseMapData.Lacunarity);
 		fastNoise.Set("Gain", noiseMapData.Persistence);

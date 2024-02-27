@@ -16,7 +16,8 @@ public struct NoiseJob : IJob
 	[ReadOnly] public NoiseType NoiseType;
 	[ReadOnly] public int Seed;
 
-	[NativeDisableUnsafePtrRestriction, ReadOnly] public IntPtr nodePtr;
+	[NativeDisableUnsafePtrRestriction]
+	[ReadOnly] public IntPtr nodePtr;
 
 	[WriteOnly]
 	public NativeArray<float> NoiseMap;
@@ -24,17 +25,23 @@ public struct NoiseJob : IJob
 	[BurstCompile]
 	public void Execute()
 	{
-		NativeArray<float> _noiseMap = new(Width * Height ,Allocator.Temp); ;
+		GenerateNoise();
+	}
 
-		var minmax = GenUniformGrid2D(nodePtr, _noiseMap, 0, 0, Width, Height, Lacunarity / 5000, Seed);
-		
-		for (int y = 0; y < Height; y++)		
-		for (int x = 0; x < Width; x++)			
-		{		
+	private void GenerateNoise()
+	{
+		NativeArray<float> _noiseMap = new(Width * Height, Allocator.Temp);
+
+		var minmax = GenUniformGrid2D(nodePtr, _noiseMap, 0, 0, Width, Height, 1 / Scale, Seed);
+
+		for (int y = 0; y < Height; y++)
+		for (int x = 0; x < Width; x++)
+		{
 			switch (NoiseType)
 			{
 				case NoiseType.Continentalness:
-					return;
+					NoiseMap = _noiseMap;
+					break;
 				case NoiseType.Erosion:
 					NoiseMap[x + y * Width] = math.unlerp(minmax.min, minmax.max, _noiseMap[x + y * Width]);
 					break;

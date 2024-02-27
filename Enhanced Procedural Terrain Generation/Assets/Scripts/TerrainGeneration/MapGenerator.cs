@@ -40,41 +40,53 @@ public class MapGenerator : MonoBehaviour
 		{
 			for (int x = 0; x < Width; x++)
 			{
+
 				var continentalness = continentalnessCurve.Evaluate(continentalnessMap[x, y]);
 				var erosion = erosionCurve.Evaluate(erosionMap[x, y]);
 				var peakAndValleys = peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
 				var currentHeight = math.floor(continentalness * (erosion + peakAndValleys) + 49);
 
-				for (int i = 0; i < regions.Length; i++)
-				{
-					if (currentHeight <= regions[i].height)
+
+				//var currentHeight = continentalnessCurve.Evaluate(continentalnessMap[x, y]);
+
+				if(drawMode == DrawMode.ColorMap)
+				{				
+					for (int i = 0; i < regions.Length; i++)
 					{
-						colorMap[y * Width + x] = regions[i].color;
-						break;
+						if (currentHeight <= regions[i].Height)
+						{
+							colorMap[y * Width + x] = regions[i].Color;
+							break;
+						}
 					}
 				}
 
-
-				if (currentHeight > maxNoiseHeight)
+				if(drawMode == DrawMode.NoiseMap)
 				{
-					maxNoiseHeight = currentHeight;
-				}
-				else if (currentHeight < minNoiseHeight)
-				{
-					minNoiseHeight = currentHeight;
-				}
+					if (currentHeight > maxNoiseHeight)
+					{
+						maxNoiseHeight = currentHeight;
+					}
+					else if (currentHeight < minNoiseHeight)
+					{
+						minNoiseHeight = currentHeight;
+					}
 
-				noiseMap[x, y] = currentHeight;
+					noiseMap[x, y] = currentHeight;
+				}
 			}
 		}
-
-		for (int y = 0; y < Height; y++)
+			
+		if(drawMode == DrawMode.NoiseMap)
 		{
-			for (int x = 0; x < Width; x++)
+			for (int y = 0; y < Height; y++)
 			{
-				noiseMap[x, y] = Mathf.Lerp(minNoiseHeight, maxNoiseHeight, noiseMap[x, y]);
-			}
-		}
+				for (int x = 0; x < Width; x++)
+				{
+					noiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, noiseMap[x, y]);
+				}
+			}	
+		}	
 
 		MapDisplay display = FindObjectOfType<MapDisplay>();
 
@@ -92,7 +104,7 @@ public class MapGenerator : MonoBehaviour
 [System.Serializable]
 public struct TerrainType
 {
-	public string name;
-	public float height;
-	public Color color;
+	public string Name;
+	public float Height;
+	public Color Color;
 }
