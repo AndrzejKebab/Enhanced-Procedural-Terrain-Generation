@@ -595,8 +595,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: -0.9
-      value: 50
+      time: -0.9928098
+      value: 49.52774
       inSlope: -0.030261252
       outSlope: -0.030261252
       tangentMode: 0
@@ -604,8 +604,8 @@ MonoBehaviour:
       inWeight: 0.83436173
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: -0.5
-      value: 50
+      time: -0.82357484
+      value: 54.964508
       inSlope: 0.19416767
       outSlope: 0.19416767
       tangentMode: 0
@@ -613,8 +613,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: -0.48
-      value: 100
+      time: -0.7918921
+      value: 100.17912
       inSlope: 0.35924685
       outSlope: 0.35924685
       tangentMode: 0
@@ -622,8 +622,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0
-      value: 100
+      time: -0.5019348
+      value: 105.47156
       inSlope: 0.26208064
       outSlope: 0.26208064
       tangentMode: 0
@@ -631,8 +631,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.2
-      value: 125
+      time: 0.015154034
+      value: 108.72579
       inSlope: 12.974332
       outSlope: 12.974332
       tangentMode: 0
@@ -640,13 +640,22 @@ MonoBehaviour:
       inWeight: 1
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 150
-      inSlope: 19.975174
-      outSlope: 19.975174
+      time: 0.5486229
+      value: 134.46567
+      inSlope: 87.79555
+      outSlope: 87.79555
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.15060319
+      inWeight: 0.10133457
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9012451
+      value: 149.29016
+      inSlope: 179.9026
+      outSlope: 179.9026
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.0979378
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -658,12 +667,30 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.1
       value: 0
-      inSlope: 4.2864733
-      outSlope: 4.2864733
+      inSlope: 0.13918748
+      outSlope: 0.13918748
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.05647244
+      outWeight: 0.38928214
+    - serializedVersion: 3
+      time: 0.1305002
+      value: 0.14295419
+      inSlope: 6.406255
+      outSlope: 6.406255
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18146005
+      outWeight: 0.035704345
+    - serializedVersion: 3
+      time: 0.21572104
+      value: 0.3493875
+      inSlope: 0.10644435
+      outSlope: 0.10644435
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.39653164
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.4859676
       value: 0.3743967
@@ -674,8 +701,8 @@ MonoBehaviour:
       inWeight: 0.122077085
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.5789445
-      value: 0.39076695
+      time: 0.5930436
+      value: 0.34155735
       inSlope: -1.7821163
       outSlope: -1.7821163
       tangentMode: 0
@@ -717,8 +744,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.115826845
-      value: 0.7480164
+      time: 0.15971112
+      value: 0.91206366
       inSlope: -1.2791098
       outSlope: -1.2791098
       tangentMode: 0
@@ -726,8 +753,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.21915077
-      value: 0.75338274
+      time: 0.3069188
+      value: 0.591644
       inSlope: -1.1622084
       outSlope: -1.1622084
       tangentMode: 0
@@ -773,10 +800,32 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  customGradient:
+    blendMode: 0
+    randomizeColour: 0
+    keys:
+    - colour: {r: 0, g: 0.16565487, b: 0.518, a: 0}
+      time: 0.037914693
+    - colour: {r: 0, g: 0.24705884, b: 0.7725491, a: 0}
+      time: 0.16113745
+    - colour: {r: 0.11764707, g: 0.5647059, b: 0.7490196, a: 0}
+      time: 0.27962086
+    - colour: {r: 0.7254902, g: 0.6784314, b: 0.43921572, a: 0}
+      time: 0.3270142
+    - colour: {r: 0.24313727, g: 0.454902, b: 0.18431373, a: 0}
+      time: 0.39810428
+    - colour: {r: 0.08627451, g: 0.36862746, b: 0.039215688, a: 0}
+      time: 0.6824645
+    - colour: {r: 0.4156863, g: 0.30980393, b: 0.18823531, a: 0}
+      time: 0.7535545
+    - colour: {r: 0.427451, g: 0.3529412, b: 0.25490198, a: 0}
+      time: 0.9905213
+    - colour: {r: 1, g: 1, b: 1, a: 0}
+      time: 1
   regions:
-  - Name: Too Low
+  - Name: Deeper Water
     Height: 49
-    Color: {r: 1, g: 0, b: 0.84193563, a: 0}
+    Color: {r: 0, g: 0.16565487, b: 0.518, a: 0}
   - Name: Deep Water
     Height: 75
     Color: {r: 0, g: 0.24705884, b: 0.7725491, a: 0}
@@ -784,7 +833,7 @@ MonoBehaviour:
     Height: 100
     Color: {r: 0.11764707, g: 0.5647059, b: 0.7490196, a: 0}
   - Name: Sand
-    Height: 115
+    Height: 110
     Color: {r: 0.7254902, g: 0.6784314, b: 0.43921572, a: 0}
   - Name: Grassland
     Height: 125
@@ -800,10 +849,7 @@ MonoBehaviour:
     Color: {r: 0.427451, g: 0.3529412, b: 0.25490198, a: 0}
   - Name: Mountain Peak
     Height: 300
-    Color: {r: 0.77647066, g: 0.77647066, b: 0.77647066, a: 0}
-  - Name: Too Hight
-    Height: 600
-    Color: {r: 0, g: 0, b: 0, a: 0}
+    Color: {r: 1, g: 1, b: 1, a: 0}
 --- !u!4 &1936061704
 Transform:
   m_ObjectHideFlags: 0

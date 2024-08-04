@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PeakAndValley
   m_EditorClassIdentifier: 
   NoiseType: 2
-  NoiseScale: 1000
+  NoiseScale: 500
   Octaves: 8
   Persistence: 0.5
-  Lacunarity: 2.5
+  Lacunarity: 2
   Offset: {x: 0, y: 0}

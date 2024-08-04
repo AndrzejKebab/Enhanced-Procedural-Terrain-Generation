@@ -1,4 +1,3 @@
-using Unity.Mathematics;
 using UnityEngine;
 
 public enum DrawMode
@@ -22,11 +21,13 @@ public class MapGenerator : MonoBehaviour
 	public HeightMapData erosionData;
 	public AnimationCurve erosionCurve;
 
+	public CustomGradient customGradient;
 	public TerrainType[] regions;
 
 	public void GenerateMap()
 	{
 		float[,] noiseMap = new float[Width, Height];
+		int[,] heightMap = new int[Width, Height];
 		float[,] continentalnessMap = NoiseGenerator.GenerateNoiseMap(continentalnessData, Height, Width, Seed);
 		float[,] erosionMap = NoiseGenerator.GenerateNoiseMap(erosionData, Height, Width, Seed);
 		float[,] peakAndValleysMap = NoiseGenerator.GenerateNoiseMap(peakAndValleysData, Height, Width, Seed);
@@ -35,7 +36,7 @@ public class MapGenerator : MonoBehaviour
 
 		float maxNoiseHeight = float.MinValue;
 		float minNoiseHeight = float.MaxValue;
-
+	
 		for (int y = 0; y < Height; y++)
 		{
 			for (int x = 0; x < Width; x++)
@@ -44,46 +45,47 @@ public class MapGenerator : MonoBehaviour
 				var continentalness = continentalnessCurve.Evaluate(continentalnessMap[x, y]);
 				var erosion = erosionCurve.Evaluate(erosionMap[x, y]);
 				var peakAndValleys = peakAndValleysCurve.Evaluate(peakAndValleysMap[x, y]);
-				var currentHeight = math.floor(continentalness * (erosion + peakAndValleys) + 49);
+				int currentHeight = Mathf.FloorToInt(continentalness * (1.01f - erosion) * (1 + peakAndValleys)) + 50 ;
 
-				if(drawMode == DrawMode.ColorMap)
-				{				
-					for (int i = 0; i < regions.Length; i++)
-					{
-						if (currentHeight <= regions[i].Height)
-						{
-							colorMap[y * Width + x] = regions[i].Color;
-							break;
-						}
-					}
-				}
-
-				if(drawMode == DrawMode.NoiseMap)
+				if (currentHeight > maxNoiseHeight)
 				{
-					if (currentHeight > maxNoiseHeight)
-					{
-						maxNoiseHeight = currentHeight;
-					}
-					else if (currentHeight < minNoiseHeight)
-					{
-						minNoiseHeight = currentHeight;
-					}
-
-					noiseMap[x, y] = currentHeight;
+					maxNoiseHeight = currentHeight;
 				}
+				else if (currentHeight < minNoiseHeight)
+				{
+					minNoiseHeight = currentHeight;
+				}
+
+				heightMap[x, y] = currentHeight;
 			}
 		}
-			
-		if(drawMode == DrawMode.NoiseMap)
+
+		if (drawMode == DrawMode.NoiseMap)
 		{
 			for (int y = 0; y < Height; y++)
 			{
 				for (int x = 0; x < Width; x++)
 				{
-					noiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, noiseMap[x, y]);
+					noiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, heightMap[x, y]);
 				}
-			}	
-		}	
+			}
+		}
+		else
+		{
+			customGradient.Clear();
+			for (int i = 0; i < regions.Length; i++)
+			{
+				customGradient.AddKey(regions[i].Color, Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, regions[i].Height));
+			}
+
+			for (int y = 0; y < Height; y++)
+			{
+				for (int x = 0; x < Width; x++)
+				{
+					colorMap[x + y * Width] = customGradient.Evaluate(Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, heightMap[x, y]));
+				}
+			}
+		}
 
 		MapDisplay display = FindObjectOfType<MapDisplay>();
 
